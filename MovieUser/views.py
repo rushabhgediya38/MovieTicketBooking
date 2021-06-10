@@ -1,12 +1,48 @@
-from django.contrib import messages
-from django.shortcuts import render
+from django.contrib import messages, auth
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+
 
 # Create your views here.
 
-
 def login(request):
-    return render(request, 'sign-in.html')
+    if request.method == 'POST':
+        username1 = request.POST.get('username')
+        password1 = request.POST.get('password')
+        context = {
+            'has_error': False
+        }
+
+        user = auth.authenticate(username=username1, password=password1)
+        print(user)
+        if user is not None:
+            request.session['uid'] = request.POST['username']
+            if request.POST.get('remember_me'):
+                response = redirect('/')
+                response.set_cookie(
+                    'cid', request.POST['username'], max_age=604800)
+                response.set_cookie(
+                    'cid2', request.POST['password'], max_age=604800)
+                auth.login(request, user)
+                messages.add_message(request, messages.SUCCESS,
+                                     f'Welcome {user.username}')
+                return response
+
+            auth.login(request, user)
+            messages.add_message(request, messages.SUCCESS,
+                                 f'Welcome {user.username}')
+            return redirect('/')
+
+        else:
+            messages.add_message(request, messages.ERROR, 'Invalid Login')
+            context['has_error']: True
+            return render(request, 'sign-in.html', context=context)
+
+    else:
+        if request.COOKIES.get('cid'):
+            return render(request, 'sign-in.html', {'cookie1': request.COOKIES['cid'],
+                                                    'cookie2': request.COOKIES['cid2']})
+        return render(request, 'sign-in.html')
 
 
 def signup(request):

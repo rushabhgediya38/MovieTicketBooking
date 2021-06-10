@@ -20,6 +20,12 @@
 
     <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
 
+    <!--    toastr -->
+    <link rel="stylesheet" type="text/css" href="{% static 'toastrFile/css/toastr.css' %}" media="all">
+
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" />-->
+<!-- end toastr -->
+
     <title>Boleto  - Online Ticket Booking Website HTML Template</title>
 
 
@@ -46,23 +52,25 @@
                         <span class="cate">hello</span>
                         <h2 class="title">welcome back</h2>
                     </div>
-                    <form class="account-form">
+                    <form class="account-form" method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
                         <div class="form-group">
-                            <label for="email2">Email<span>*</span></label>
-                            <input type="text" placeholder="Enter Your Email" id="email2" required>
+                            <label for="username2">username<span>*</span></label>
+                            <input type="text" placeholder="Enter Your username" value="{{ cookie1 }}" name="username" id="username2" required>
                         </div>
                         <div class="form-group">
                             <label for="pass3">Password<span>*</span></label>
-                            <input type="password" placeholder="Password" id="pass3" required>
+                            <input type="password" placeholder="Enter Your Password" value="{{ cookie2 }}" name="password" id="pass3" required>
                         </div>
                         <div class="form-group checkgroup">
-                            <input type="checkbox" id="bal2" required checked>
+                            <input type="checkbox" id="bal2" name="remember_me" checked>
                             <label for="bal2">remember password</label>
                             <a href="#0" class="forget-pass">Forget Password</a>
                         </div>
                         <div class="form-group text-center">
-                            <input type="submit" value="log in">
+                            <input type="submit">
                         </div>
+
                     </form>
                     <div class="option">
                         Don't have an account? <a href="{% url 'signup' %}">sign up now</a>
@@ -91,8 +99,13 @@
     </section>
     <!-- ==========Sign-In-Section========== -->
 
+    <!--    toastr js -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'toastrFile/js/toastr.min.js' %}"></script>
+    <script>{% include 'flashMessages/flashmessages.js' %}</script>
 
-    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<!--    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>-->
+
     <script src="{% static 'js/modernizr-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/plugins.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

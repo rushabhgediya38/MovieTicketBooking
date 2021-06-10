@@ -45,10 +45,6 @@
     </div>
     <!-- ==========Preloader========== -->
 
-<!--    <div>-->
-<!--        {% include 'flashMessages/flashmessages.html' %}-->
-<!--    </div>-->
-
     <!-- ==========Sign-In-Section========== -->
     <section class="account-section bg_img">
         <div class="container">
@@ -127,25 +123,11 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="{% static 'toastrFile/js/toastr.min.js' %}"></script>
 <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>-->
-    <script>
-        {% if messages %}
-            document.addEventListener("DOMContentLoaded", function(event) {
-                toastr.options = { "closeButton": true, "debug": false, "newestOnTop": false,
-                    "progressBar": true, "positionClass": "toast-top-right", "preventDuplicates": false,
-                    "onclick": null, "showDuration": "300", "hideDuration": "1000", "timeOut": "5000",
-                    "extendedTimeOut": "1000", "showEasing": "swing", "hideEasing": "linear",
-                    "showMethod": "fadeIn", "hideMethod": "fadeOut" };
-                {% autoescape off %}
-                    {% for msg in messages %}
-                        toastr.{{ msg.level_tag }}("{{ msg }}");
-                    {% endfor %}
-                {% endautoescape %}
-            });
-        {% endif %}
-    </script>
 
+    <script>{% include 'flashMessages/flashmessages.js' %}</script>
+
+    
 <!--    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>-->
-
     <script src="{% static 'js/modernizr-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/plugins.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
