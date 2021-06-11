@@ -399,7 +399,7 @@
                     </div>
                     <ul class="tab-menu">
                         <li class="active">
-                            now showing 
+                            now showing
                         </li>
                         <li>
                             coming soon
@@ -409,19 +409,21 @@
                         </li>
                     </ul>
                 </div>
+
                 <div class="tab-area mb-30-none">
                     <div class="tab-item active">
-                        <div class="owl-carousel owl-theme tab-slider">
+                        <div class="owl-carousel owl-theme" id="owl-example1">
                             <div class="item">
+                                {% for i in m_now %}
                                 <div class="movie-grid">
                                     <div class="movie-thumb c-thumb">
                                         <a href="#0">
-                                            <img src="{% static 'images/movie/movie01.jpg' %}" alt="movie">
+                                            <img src="{{i.img.url}}" alt="movie">
                                         </a>
                                     </div>
                                     <div class="movie-content bg-one">
                                         <h5 class="title m-0">
-                                            <a href="#0">alone</a>
+                                            <a href="#0">{{i.name}}</a>
                                         </h5>
                                         <ul class="movie-rating-percent">
                                             <li>
@@ -438,324 +440,81 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div> 
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="#0">
-                                            <img src="{% static 'images/movie/movie02.jpg' %}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="#0">mars</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/cake.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="#0">
-                                            <img src="{% static 'images/movie/movie03.jpg' %}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="#0">venus</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/cake.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="#0">
-                                            <img src="{% static 'images/movie/movie04.jpg' %}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="#0">horror night</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/cake.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> 
+                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-item">
-                        <div class="owl-carousel owl-theme tab-slider">
+                        <div class="owl-carousel owl-theme" id="owl-example2">
                             <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="#0">
-                                            <img src="{% static 'images/movie/movie01.jpg' %}" alt="movie">
-                                        </a>
+                                {% for i in m_ex %}
+                                    <div class="movie-grid">
+                                        <div class="movie-thumb c-thumb">
+                                            <a href="#0">
+                                                <img src="{{i.img.url}}" alt="movie">
+                                            </a>
+                                        </div>
+                                        <div class="movie-content bg-one">
+                                            <h5 class="title m-0">
+                                                <a href="#0">{{i.name}}</a>
+                                            </h5>
+                                            <ul class="movie-rating-percent">
+                                                <li>
+                                                    <div class="thumb">
+                                                        <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
+                                                    </div>
+                                                    <span class="content">88%</span>
+                                                </li>
+                                                <li>
+                                                    <div class="thumb">
+                                                        <img src="{% static 'images/movie/cake.png' %}" alt="movie">
+                                                    </div>
+                                                    <span class="content">88%</span>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="#0">alone</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/cake.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> 
+                                {% endfor %}
                             </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="#0">
-                                            <img src="{% static 'images/movie/movie02.jpg' %}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="#0">mars</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/cake.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="#0">
-                                            <img src="{% static 'images/movie/movie03.jpg' %}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="#0">venus</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/cake.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="#0">
-                                            <img src="{% static 'images/movie/movie04.jpg' %}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="#0">horror night</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/cake.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> 
-                            </div>
+
                         </div>
                     </div>
+
                     <div class="tab-item">
-                        <div class="owl-carousel owl-theme tab-slider">
+                        <div class="owl-carousel owl-theme" id="owl-example3">
                             <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="#0">
-                                            <img src="{% static 'images/movie/movie01.jpg' %}" alt="movie">
-                                        </a>
+                                {% for i in m_co %}
+                                    <div class="movie-grid">
+                                        <div class="movie-thumb c-thumb">
+                                            <a href="#0">
+                                                <img src="{{i.img.url}}" alt="movie">
+                                            </a>
+                                        </div>
+                                        <div class="movie-content bg-one">
+                                            <h5 class="title m-0">
+                                                <a href="#0">{{i.name}}</a>
+                                            </h5>
+                                            <ul class="movie-rating-percent">
+                                                <li>
+                                                    <div class="thumb">
+                                                        <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
+                                                    </div>
+                                                    <span class="content">88%</span>
+                                                </li>
+                                                <li>
+                                                    <div class="thumb">
+                                                        <img src="{% static 'images/movie/cake.png' %}" alt="movie">
+                                                    </div>
+                                                    <span class="content">88%</span>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="#0">alone</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/cake.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> 
+                                {% endfor %}
                             </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="#0">
-                                            <img src="{% static 'images/movie/movie02.jpg' %}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="#0">mars</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/cake.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="#0">
-                                            <img src="{% static 'images/movie/movie03.jpg' %}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="#0">venus</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/cake.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="item">
-                                <div class="movie-grid">
-                                    <div class="movie-thumb c-thumb">
-                                        <a href="#0">
-                                            <img src="{% static 'images/movie/movie04.jpg' %}" alt="movie">
-                                        </a>
-                                    </div>
-                                    <div class="movie-content bg-one">
-                                        <h5 class="title m-0">
-                                            <a href="#0">horror night</a>
-                                        </h5>
-                                        <ul class="movie-rating-percent">
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/tomato.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                            <li>
-                                                <div class="thumb">
-                                                    <img src="{% static 'images/movie/cake.png' %}" alt="movie">
-                                                </div>
-                                                <span class="content">88%</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> 
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -763,6 +522,7 @@
         </div>
     </section>
     <!-- ==========Movie-Section========== -->
+
 
     <!-- ==========Event-Section========== -->
     <section class="event-section padding-top padding-bottom bg-four">
@@ -1443,6 +1203,15 @@
     <script src="{% static 'js/viewport.jquery.js' %}"></script>
     <script src="{% static 'js/nice-select.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+
+    <script>
+    $(document).ready(function() {
+        $("#owl-example1").owlCarousel();
+        $("#owl-example2").owlCarousel();
+        $("#owl-example3").owlCarousel();
+    });
+    </script>
 </body>
+
 
 </html>

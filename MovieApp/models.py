@@ -66,7 +66,7 @@ class Movie(models.Model):
     M_crew = models.ManyToManyField(to=M_Crew)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} - {self.M_latest}'
 
 
 class Images(models.Model):

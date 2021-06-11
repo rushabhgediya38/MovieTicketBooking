@@ -6,7 +6,17 @@ from .models import *
 
 
 def index(request):
-    return render(request, 'index.html')
+    all_now = Movie.objects.all().filter(M_latest='NOW')
+    print(all_now)
+    all_ex = Movie.objects.all().filter(M_latest='EXCLUSIVE')
+    all_co = Movie.objects.all().filter(M_latest='COMING')
+
+    context = {
+        'm_now': all_now,
+        'm_ex': all_ex,
+        'm_co': all_co
+    }
+    return render(request, 'index.html', context)
 
 
 def movie_details(request):
