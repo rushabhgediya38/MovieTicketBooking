@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
@@ -186,14 +185,13 @@
             <div class="details-banner-wrapper">
 
                 <div class="details-banner-thumb">
-                    <img src="./assets/images/movie/venus.jpg" alt="movie">
-                    <a href="https://www.youtube.com/embed/KGeBMAgc46E" class="video-popup">
-                        <img src="{% static 'images/movie/video-button.png' %}" alt="movie">
-                    </a>
+                    {% for i in all_movie %}
+                        <img src="{{i.img.url}}" alt="movie">
+                    {% endfor %}
                 </div>
 
                 <div class="details-banner-content offset-lg-3">
-                    <h3 class="title">Venus</h3>
+                    <h3 class="title">{% for i in all_movie %} {{i.name}} {% endfor %}</h3>
                     <div class="tags">
                         {% for i in all_movie %}
                             {% for k in i.M_lang.all %}
@@ -282,7 +280,9 @@
                         <p><a href="#0">Rate It</a></p>
                     </div>
                 </div>
-                <a href="#0" class="custom-button">book tickets</a>
+                {% for i in all_movie %}
+                    <a href="{% url 'movie_ticket_plan' i.name %}" class="custom-button">book tickets</a>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -358,13 +358,11 @@
                 <div class="col-lg-9 mb-50">
                     <div class="movie-details">
                         <h3 class="title">photos</h3>
-                        <div class="details-photos owl-carousel">
+                        <div class="details-photos owl-carousel owl-theme" id="owl-example1">
                             {% for i in all_movie %}
                                 {% for k in i.movie_images.all %}
                                     <div class="thumb">
-                                        <a href="{{k.m_image.url}}" class="img-pop">
-                                            <img src="{{k.m_image.url}}" alt="movie">
-                                        </a>
+                                        <img src="{{k.m_image.url}}" alt="Owl Image">
                                     </div>
                                 {% endfor %}
                             {% endfor %}
@@ -694,6 +692,19 @@
     <script src="{% static 'js/nice-select.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
 
+   <script>
+
+    $(document).ready(function() {
+      $("#owl-example1").owlCarousel({
+          autoPlay: 3000, //Set AutoPlay to 3 seconds
+          items : 3,
+          itemsDesktop : [1199,3],
+          itemsDesktopSmall : [979,3]
+
+      });
+
+    });
+    </script>
 
 </body>
 

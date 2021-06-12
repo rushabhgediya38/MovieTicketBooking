@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from .models import *
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -19,10 +20,31 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-def movie_details(request):
-    all_movie = Movie.objects.all().filter(M_latest='NOW')
+def movie_details(request, mDetails):
+    all_movie = Movie.objects.all().filter(name=mDetails)
 
     context = {
         'all_movie': all_movie
     }
     return render(request, 'movie-details.html', context)
+
+
+# def movie_details_example(request):
+#     all_movie = Movie.objects.all().filter(M_latest='NOW')
+#
+#     context = {
+#         'all_movie': all_movie
+#     }
+#     return render(request, 'movie-details.html', context)
+
+def movie_seat_plan(request, mDetails):
+    movie_available = Movie.objects.all().filter(name__exact=mDetails)
+
+    if movie_available:
+        print('-------------------------', movie_available)
+        context = {
+            'movie_av': movie_available
+        }
+        return render(request, 'movie-ticket-plan.html', context)
+    else:
+        return HttpResponse('movie not find')
