@@ -1,0 +1,6 @@
+<option value="">---------</option>
+{% for vi in view %}
+    {% for k in vi.M_screen.all %}
+        <option value="{{ k.m_screen }}">{{ k.m_screen }}</option>
+    {% endfor %}
+{% endfor %}

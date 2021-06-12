@@ -10,4 +10,6 @@ urlpatterns = [
          movie_seat_plan, name='movie_ticket_plan'),
 
     path('ajax/load-cities/', load_cities, name='ajax_load_cities'),
+    path('ajax/load-multiplex/', load_multiplex, name='ajax_load_multiplex'),
+    path('ajax/load-exp/', load_exp, name='ajax_load_exp'),
 ]

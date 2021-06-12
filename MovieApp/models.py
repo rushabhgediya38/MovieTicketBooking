@@ -42,13 +42,6 @@ Movie_latest = [
 ]
 
 
-class M_Screen(models.Model):
-    m_screen = models.CharField(max_length=256)
-
-    def __str__(self):
-        return str(self.m_screen)
-
-
 class M_Cast(models.Model):
     ca_img = models.ImageField(upload_to='movie-cast')
     ca_name = models.CharField(max_length=256)
@@ -85,7 +78,7 @@ class Movie(models.Model):
     M_min = models.IntegerField()
     M_desc = models.TextField(max_length=5000)
     M_lang = models.ManyToManyField(to=M_lang)
-    M_screen = models.ManyToManyField(to=M_Screen)
+
     M_cast = models.ManyToManyField(to=M_Cast)
     M_crew = models.ManyToManyField(to=M_Crew)
 
@@ -110,15 +103,25 @@ class M_time(models.Model):
         return str(self.m_time)
 
 
+class M_Screen(models.Model):
+    m_screen = models.CharField(max_length=256)
+
+    def __str__(self):
+        return str(self.m_screen)
+
+
 class M_multiplex_name(models.Model):
     m_city_name = models.ForeignKey(M_city, on_delete=models.CASCADE)
     multiplex_name = models.CharField(max_length=256)
     multiplex_location = models.CharField(max_length=256)
     Multiplex_movie = models.ManyToManyField(to=Movie, blank=True, null=True)
     movie_time = models.ManyToManyField(to=M_time, blank=True, null=True)
+    M_screen = models.ManyToManyField(to=M_Screen, blank=True, null=True)
 
     def __str__(self):
         return f'{self.multiplex_name} - {self.m_city_name}'
 
     class Meta:
         ordering = ('multiplex_name',)
+
+

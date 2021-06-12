@@ -22,8 +22,6 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
     <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
-
-
     <title>Boleto  - Online Ticket Booking Website HTML Template</title>
 
 </head>
@@ -203,6 +201,7 @@
                 <div class="details-banner-content">
                     {% for i in movie_av %}
                         <h3 class="title">{{i.name}}</h3>
+                        <input hidden id="id_title" value="{{i.name}}">
 
                         <div class="tags">
                             {% for k in i.M_lang.all %}
@@ -219,7 +218,7 @@
     <!-- ==========Book-Section========== -->
     <section class="book-section bg-one">
         <div class="container">
-            <form class="ticket-search-form two" method="post" id="personFORM" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
+            <form class="ticket-search-form two" method="post" id="personFORM" data-exp-url="{% url 'ajax_load_exp' %}" data-multiplex-url="{% url 'ajax_load_multiplex' %}" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
                 {% csrf_token %}
                 <div class="form-group">
                     <div class="thumb">
@@ -235,6 +234,8 @@
                     </select>
                 </div>
 
+
+
                 <div class="form-group">
                     <div class="thumb">
                         <img src="{% static 'images/ticket/city.png' %}" alt="ticket">
@@ -242,6 +243,29 @@
                     <span class="type">city</span>
                     <select class="select-bar" style="color: #090a0a;" name="city" id="id_city">
                         <option value="" selected>---------</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="thumb">
+                        <img src="{% static 'images/ticket/cinema.png' %}" alt="ticket">
+                    </div>
+                    <span class="type">cinema</span>
+                    <select class="select-bar" style="color: #090a0a;" name="multiplex" id="id_multiplex">
+                        <option value="" selected>---------</option>
+<!--                        <option value="Awaken">Awaken</option>-->
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div class="thumb">
+                        <img src="{% static 'images/ticket/exp.png' %}" alt="ticket">
+                    </div>
+                    <span class="type">Experience</span>
+                    <select class="select-bar" style="color: #090a0a;" id="id_experience">
+                        <option value="" selected>---------</option>
+<!--                        <option value="English-2D">English-2D</option>-->
                     </select>
                 </div>
 
@@ -260,40 +284,13 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <div class="thumb">
-                        <img src="{% static 'images/ticket/cinema.png' %}" alt="ticket">
-                    </div>
-                    <span class="type">cinema</span>
-                    <select class="select-bar" style="color: #090a0a;">
-                        <option value="" selected>---------</option>
-                        <option value="Awaken">Awaken</option>
-                        <option value="Venus">Venus</option>
-                        <option value="wanted">wanted</option>
-                        <option value="joker">joker</option>
-                        <option value="fid">fid</option>
-                        <option value="kidio">kidio</option>
-                        <option value="mottus">mottus</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <div class="thumb">
-                        <img src="{% static 'images/ticket/exp.png' %}" alt="ticket">
-                    </div>
-                    <span class="type">Experience</span>
-                    <select class="select-bar" style="color: #090a0a;">
-                        <option value="" selected>---------</option>
-                        <option value="English-2D">English-2D</option>
-                        <option value="English-3D">English-3D</option>
-                        <option value="Hindi-2D">Hindi-2D</option>
-                        <option value="Hindi-3D">Hindi-3D</option>
-                        <option value="Telegu-2D">Telegu-2D</option>
-                        <option value="Telegu-3D">Telegu-3D</option>
-                    </select>
-                </div>
+
+
+
             </form>
         </div>
     </section>
+
     <!-- ==========Book-Section========== -->
 
     <!-- ==========Movie-Section========== -->
@@ -583,6 +580,48 @@
         success: function (data) {
             console.log(data);
             $("#id_city").html(data);
+        }
+      });
+
+    });
+  </script>
+
+  <script>
+    $("#id_city").change(function () {
+      var url = $("#personFORM").attr("data-multiplex-url");
+      var movie_name = $("#id_title").val();
+      var cityId = $(this).val();
+
+      $.ajax({
+        url: url,
+        data: {
+          'city': cityId,
+          'M_name': movie_name
+        },
+        success: function (data) {
+            console.log(data);
+            $("#id_multiplex").html(data);
+        }
+      });
+
+    });
+  </script>
+
+    <script>
+    $("#id_multiplex").change(function () {
+      var url = $("#personFORM").attr("data-exp-url");
+      var cinema_name = $("#id_multiplex").val();
+      console.log(cinema_name)
+      var cinemaId = $(this).val();
+
+      $.ajax({
+        url: url,
+        data: {
+          'cinema': cinemaId
+        },
+        success: function (data) {
+            console.log(data);
+            $("#id_experience").html(data);
         }
       });
 
