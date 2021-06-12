@@ -1,5 +1,8 @@
 <!DOCTYPE html>
+{% load sizify_tags %}
 {% load static %}
+{% load humanize %}
+
 <html lang="en">
 
 <head>
@@ -26,6 +29,7 @@
 </head>
 
 <body>
+
     <!-- ==========Preloader========== -->
     <div class="preloader">
         <div class="preloader-inner">
@@ -215,40 +219,54 @@
     <!-- ==========Book-Section========== -->
     <section class="book-section bg-one">
         <div class="container">
-            <form class="ticket-search-form two">
+            <form class="ticket-search-form two" method="post" id="personFORM" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="thumb">
+                        <img src="{% static 'images/ticket/city.png' %}" alt="ticket">
+                    </div>
+                    <span class="type">state</span>
+                    <select class="form-select" style="color: #090a0a;" id="stateId">
+                        <option value="">---------</option>
+                        {% for i in state %}
+                            <option value="{{ i.id }}">{{ i.st_name }}</option>
+                        {% endfor %}
+<!--                        <option value="london">London</option>-->
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <div class="thumb">
                         <img src="{% static 'images/ticket/city.png' %}" alt="ticket">
                     </div>
                     <span class="type">city</span>
-                    <select class="select-bar">
-                        <option value="london">London</option>
-                        <option value="dhaka">dhaka</option>
-                        <option value="rosario">rosario</option>
-                        <option value="madrid">madrid</option>
-                        <option value="koltaka">kolkata</option>
-                        <option value="rome">rome</option>
-                        <option value="khoksa">khoksa</option>
+                    <select class="select-bar" style="color: #090a0a;" name="city" id="id_city">
+                        <option value="" selected>---------</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <div class="thumb">
                         <img src="{% static 'images/ticket/date.png' %}" alt="ticket">
                     </div>
                     <span class="type">date</span>
-                    <select class="select-bar">
-                        <option value="26-12-19">23/10/2020</option>
-                        <option value="26-12-19">24/10/2020</option>
-                        <option value="26-12-19">25/10/2020</option>
-                        <option value="26-12-19">26/10/2020</option>
+                    <select class="select-bar" style="color: #090a0a;">
+                        <option value="" selected>---------</option>
+                        <option value="{% current_time '%d-%m-%Y' %}">{% current_time "%d-%m-%Y" %}</option>
+                        <option value="{{1|sizify}}">{{1|sizify}}</option>
+                        <option value="{{2|three_time}}">{{2|three_time}}</option>
+<!--                        <option value="26-12-19">24/10/2020</option>-->
+
                     </select>
                 </div>
+
                 <div class="form-group">
                     <div class="thumb">
                         <img src="{% static 'images/ticket/cinema.png' %}" alt="ticket">
                     </div>
                     <span class="type">cinema</span>
-                    <select class="select-bar">
+                    <select class="select-bar" style="color: #090a0a;">
+                        <option value="" selected>---------</option>
                         <option value="Awaken">Awaken</option>
                         <option value="Venus">Venus</option>
                         <option value="wanted">wanted</option>
@@ -263,7 +281,8 @@
                         <img src="{% static 'images/ticket/exp.png' %}" alt="ticket">
                     </div>
                     <span class="type">Experience</span>
-                    <select class="select-bar">
+                    <select class="select-bar" style="color: #090a0a;">
+                        <option value="" selected>---------</option>
                         <option value="English-2D">English-2D</option>
                         <option value="English-3D">English-3D</option>
                         <option value="Hindi-2D">Hindi-2D</option>
@@ -535,6 +554,8 @@
     </footer>
     <!-- ==========Newslater-Section========== -->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'js/modernizr-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/plugins.js' %}"></script>
@@ -546,8 +567,27 @@
     <script src="{% static 'js/countdown.min.js' %}"></script>
     <script src="{% static 'js/odometer.min.js' %}"></script>
     <script src="{% static 'js/viewport.jquery.js' %}"></script>
-    <script src="{% static 'js/nice-select.js' %}"></script>
+<!--    <script src="{% static 'js/nice-select.js' %}"></script>-->
     <script src="{% static 'js/main.js' %}"></script>
+
+  <script>
+    $("#stateId").change(function () {
+      var url = $("#personFORM").attr("data-cities-url");
+      var stateId = $(this).val();
+
+      $.ajax({
+        url: url,
+        data: {
+          'state': stateId
+        },
+        success: function (data) {
+            console.log(data);
+            $("#id_city").html(data);
+        }
+      });
+
+    });
+  </script>
 
 </body>
 

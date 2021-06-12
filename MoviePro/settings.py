@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'MovieApp',
     'MovieUser',
+
+    'django.contrib.humanize'
 ]
 
 MIDDLEWARE = [

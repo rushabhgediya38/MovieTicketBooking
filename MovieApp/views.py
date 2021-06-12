@@ -1,9 +1,5 @@
 from django.shortcuts import render, HttpResponse
 from .models import *
-from django.shortcuts import get_object_or_404
-
-
-# Create your views here.
 
 
 def index(request):
@@ -39,12 +35,20 @@ def movie_details(request, mDetails):
 
 def movie_seat_plan(request, mDetails):
     movie_available = Movie.objects.all().filter(name__exact=mDetails)
-
+    states = M_state.objects.all().order_by('st_name')
     if movie_available:
         print('-------------------------', movie_available)
         context = {
-            'movie_av': movie_available
+            'movie_av': movie_available,
+            'state': states
         }
         return render(request, 'movie-ticket-plan.html', context)
     else:
         return HttpResponse('movie not find')
+
+
+def load_cities(request):
+    state_id = request.GET.get('state')
+    cities = M_city.objects.filter(m_state_id=state_id)
+    print('-------------All-Cities-----------------', cities)
+    return render(request, 'dropdownFolder/city_dropdown_list_options.html', {'cities': cities})
