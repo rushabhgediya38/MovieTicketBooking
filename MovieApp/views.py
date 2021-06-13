@@ -4,14 +4,13 @@ from .models import *
 
 def index(request):
     all_now = Movie.objects.all().filter(M_latest='NOW')
-    print(all_now)
-    all_ex = Movie.objects.all().filter(M_latest='EXCLUSIVE')
     all_co = Movie.objects.all().filter(M_latest='COMING')
+    all_ex = Movie.objects.all().filter(M_latest='EXCLUSIVE')
 
     context = {
         'm_now': all_now,
-        'm_ex': all_ex,
-        'm_co': all_co
+        'm_co': all_co,
+        'm_ex': all_ex
     }
     return render(request, 'index.html', context)
 
@@ -72,3 +71,23 @@ def load_exp(request):
     check_name = M_multiplex_name.objects.filter(multiplex_name__exact=multiplexName)
     print(check_name)
     return render(request, 'dropdownFolder/user_view.html', {'view': check_name})
+
+
+# $("#button").click(function() {
+#   $("#fn").show();
+#   $("#ln").show();
+# });
+# <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+# <input id="button" type="button" value="Click">
+# <br>
+# <div id="fn" hidden>First Name :
+#   <input type="text" />
+# </div>
+# <br>
+# <div id="ln" hidden>Last Name :
+#   <input type="text" />
+# </div>
+
+# https://stackoverflow.com/questions/8344712/javascript-buttons-select-and-unselect
+# https://stackoverflow.com/questions/50310426/selecting-only-one-button-in-a-set
+# https://stackoverflow.com/questions/31385770/how-to-display-input-field-using-button-on-click-function-with-javascript-typesc/31386443

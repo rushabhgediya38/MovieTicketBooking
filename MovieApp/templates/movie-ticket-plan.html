@@ -568,43 +568,55 @@
     <script src="{% static 'js/main.js' %}"></script>
 
   <script>
-    $("#stateId").change(function () {
+   $("#stateId").change(function () {
       var url = $("#personFORM").attr("data-cities-url");
       var stateId = $(this).val();
 
-      $.ajax({
-        url: url,
-        data: {
-          'state': stateId
-        },
-        success: function (data) {
-            console.log(data);
-            $("#id_city").html(data);
+        if(stateId){
+            $.ajax({
+            url:url,
+            data: {
+              'state': stateId
+            },
+            success: function (data) {
+              console.log(data);
+              $("#id_city").html(data);
+              $('#id_multiplex').html('<option value="">Select City first</option>');
+              $('#id_experience').html('<option value="">Select Cinema first</option>');
+            }
+            });
+        }else{
+            $('#id_city').html('<option value="">Select State first</option>');
+            $('#id_multiplex').html('<option value="">Select City first</option>');
+            $('#id_experience').html('<option value="">Select Cinema first</option>');
         }
-      });
-
     });
   </script>
 
   <script>
     $("#id_city").change(function () {
-      var url = $("#personFORM").attr("data-multiplex-url");
-      var movie_name = $("#id_title").val();
-      var cityId = $(this).val();
+    var url = $("#personFORM").attr("data-multiplex-url");
+    var movie_name = $("#id_title").val();
+    var cityId = $(this).val();
 
+    if(cityId){
       $.ajax({
-        url: url,
-        data: {
-          'city': cityId,
-          'M_name': movie_name
-        },
-        success: function (data) {
-            console.log(data);
-            $("#id_multiplex").html(data);
-        }
+      url: url,
+      data: {
+        'city': cityId,
+        'M_name': movie_name
+      },
+      success: function (data) {
+        console.log(data);
+        $("#id_multiplex").html(data);
+        $('#id_experience').html('<option value="">Select Cinema first</option>');
+      }
       });
-
-    });
+    }else{
+      $('#id_multiplex').html('<option value="">Select City first</option>');
+      $('#id_experience').html('<option value="">Select Cinema first</option>');
+    }
+});
   </script>
 
     <script>
@@ -614,7 +626,8 @@
       console.log(cinema_name)
       var cinemaId = $(this).val();
 
-      $.ajax({
+      if(cinemaId){
+        $.ajax({
         url: url,
         data: {
           'cinema': cinemaId
@@ -623,10 +636,12 @@
             console.log(data);
             $("#id_experience").html(data);
         }
-      });
-
+        });
+      }else{
+        $('#id_experience').html('<option value="">Select Cinema first</option>');
+      }
     });
-  </script>
+    </script>
 
 </body>
 

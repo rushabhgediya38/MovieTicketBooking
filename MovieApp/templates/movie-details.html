@@ -281,7 +281,11 @@
                     </div>
                 </div>
                 {% for i in all_movie %}
-                    <a href="{% url 'movie_ticket_plan' i.name %}" class="custom-button">book tickets</a>
+                    {% if i.M_latest == 'NOW' %}
+                        <a href="{% url 'movie_ticket_plan' i.name %}" class="custom-button">book tickets</a>
+                    {% elif i.M_latest == 'EXCLUSIVE' %}
+                        <a href="{% url 'movie_ticket_plan' i.name %}" class="custom-button">book tickets</a>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
