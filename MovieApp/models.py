@@ -77,7 +77,6 @@ class Movie(models.Model):
     M_hour = models.IntegerField()
     M_min = models.IntegerField()
     M_desc = models.TextField(max_length=5000)
-    M_lang = models.ManyToManyField(to=M_lang)
 
     M_cast = models.ManyToManyField(to=M_Cast)
     M_crew = models.ManyToManyField(to=M_Crew)
@@ -117,6 +116,7 @@ class M_multiplex_name(models.Model):
     Multiplex_movie = models.ManyToManyField(to=Movie, blank=True, null=True)
     movie_time = models.ManyToManyField(to=M_time, blank=True, null=True)
     M_screen = models.ManyToManyField(to=M_Screen, blank=True, null=True)
+    M_lang = models.ManyToManyField(to=M_lang, blank=True, null=True)
 
     def __str__(self):
         return f'{self.multiplex_name} - {self.m_city_name}'

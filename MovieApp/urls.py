@@ -12,4 +12,7 @@ urlpatterns = [
     path('ajax/load-cities/', load_cities, name='ajax_load_cities'),
     path('ajax/load-multiplex/', load_multiplex, name='ajax_load_multiplex'),
     path('ajax/load-exp/', load_exp, name='ajax_load_exp'),
+    path('ajax/load-language/', load_language, name='ajax_load_language'),
+    path('ajax/load-time/', load_time, name='ajax_load_time'),
+
 ]

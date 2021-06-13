@@ -1,0 +1,6 @@
+<option value="">---------</option>
+{% for vi in mul_time %}
+    {% for i in vi.movie_time.all %}
+        <option value="{{ i.id }}">{{ i.m_time }}</option>
+    {% endfor %}
+{% endfor %}

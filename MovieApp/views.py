@@ -49,7 +49,7 @@ def movie_seat_plan(request, mDetails):
 def load_cities(request):
     state_id = request.GET.get('state')
     cities = M_city.objects.filter(m_state_id=state_id)
-    print('-------------All-Cities-----------------', cities)
+    # print('-------------All-Cities-----------------', cities)
     return render(request, 'dropdownFolder/city_dropdown_list_options.html', {'cities': cities})
 
 
@@ -60,19 +60,38 @@ def load_multiplex(request):
     multi = M_multiplex_name.objects.filter(m_city_name_id=city_id, Multiplex_movie__name__exact=M_name)
 
     # print('-------------All-Multiplex-----------------', multi)
-    print('-------------All-Multiplex-movie name-----------------', M_name)
+    # print('-------------All-Multiplex-movie name-----------------', M_name)
     return render(request, 'dropdownFolder/multiplex_dropdown.html', {'multi': multi})
 
 
 def load_exp(request):
     multiplexName = request.GET.get('cinema')
-    print('-------------All-exp-----------------', multiplexName)
+    # print('-------------All-exp-----------------', multiplexName)
 
     check_name = M_multiplex_name.objects.filter(multiplex_name__exact=multiplexName)
     print(check_name)
     return render(request, 'dropdownFolder/user_view.html', {'view': check_name})
 
 
+def load_language(request):
+    city_id = request.GET.get('city_id')
+    C_name = request.GET.get('cinema_name')
+    M_name = request.GET.get('movie_name')
+
+    multi_lan = M_multiplex_name.objects.filter(m_city_name__id=city_id, multiplex_name=C_name,
+                                                Multiplex_movie__name__exact=M_name)
+    print('----------------------------', multi_lan)
+
+    return render(request, 'dropdownFolder/language_dropdown.html', {'mul_lan': multi_lan})
+
+
+def load_time(request):
+    city_id = request.GET.get('city_id')
+    C_name = request.GET.get('cinema_name')
+
+    multi = M_multiplex_name.objects.filter(m_city_name__id=city_id, multiplex_name=C_name)
+    print('----------------------------', multi)
+    return render(request, 'dropdownFolder/time_dropdown.html', {'mul_time': multi})
 # $("#button").click(function() {
 #   $("#fn").show();
 #   $("#ln").show();

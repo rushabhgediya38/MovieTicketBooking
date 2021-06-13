@@ -1,0 +1,6 @@
+<option value="">---------</option>
+{% for vi in mul_lan %}
+    {% for l in vi.M_lang.all %}
+        <option value="{{ l.id }}">{{ l.language }}</option>
+    {% endfor %}
+{% endfor %}
