@@ -65,10 +65,11 @@ def load_multiplex(request):
 
 
 def load_exp(request):
+    city_id = request.GET.get('city_name')
     multiplexName = request.GET.get('cinema')
     # print('-------------All-exp-----------------', multiplexName)
 
-    check_name = M_multiplex_name.objects.filter(multiplex_name__exact=multiplexName)
+    check_name = M_multiplex_name.objects.filter(m_city_name_id=city_id, multiplex_name__exact=multiplexName)
     print(check_name)
     return render(request, 'dropdownFolder/user_view.html', {'view': check_name})
 
@@ -92,6 +93,8 @@ def load_time(request):
     multi = M_multiplex_name.objects.filter(m_city_name__id=city_id, multiplex_name=C_name)
     print('----------------------------', multi)
     return render(request, 'dropdownFolder/time_dropdown.html', {'mul_time': multi})
+
+
 # $("#button").click(function() {
 #   $("#fn").show();
 #   $("#ln").show();
@@ -110,3 +113,4 @@ def load_time(request):
 # https://stackoverflow.com/questions/8344712/javascript-buttons-select-and-unselect
 # https://stackoverflow.com/questions/50310426/selecting-only-one-button-in-a-set
 # https://stackoverflow.com/questions/31385770/how-to-display-input-field-using-button-on-click-function-with-javascript-typesc/31386443
+

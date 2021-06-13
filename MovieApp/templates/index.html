@@ -417,7 +417,7 @@
                                 {% for i in m_now %}
                                 <div class="movie-grid">
                                     <div class="movie-thumb c-thumb">
-                                        <a href="#0">
+                                        <a href="{% url 'movie_details' i.name %}">
                                             <img src="{{i.img.url}}" alt="movie">
                                         </a>
                                     </div>
@@ -452,7 +452,7 @@
                                 {% for i in m_co %}
                                     <div class="movie-grid">
                                         <div class="movie-thumb c-thumb">
-                                            <a href="#0">
+                                            <a href="{% url 'movie_details' i.name %}">
                                                 <img src="{{i.img.url}}" alt="movie">
                                             </a>
                                         </div>
@@ -488,7 +488,7 @@
                                 {% for i in m_ex %}
                                     <div class="movie-grid">
                                         <div class="movie-thumb c-thumb">
-                                            <a href="#0">
+                                            <a href="{% url 'movie_details' i.name %}">
                                                 <img src="{{i.img.url}}" alt="movie">
                                             </a>
                                         </div>

@@ -218,16 +218,16 @@
     <!-- ==========Book-Section========== -->
     <section class="book-section bg-one">
         <div class="container">
-            <form class="ticket-search-form two" method="post" id="personFORM" data-len-url="{% url 'ajax_load_language' %}" data-time-url="{% url 'ajax_load_time' %}" data-exp-url="{% url 'ajax_load_exp' %}" data-multiplex-url="{% url 'ajax_load_multiplex' %}" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
+            <form class="ticket-search-form two" id="personFORM" data-len-url="{% url 'ajax_load_language' %}" data-time-url="{% url 'ajax_load_time' %}" data-exp-url="{% url 'ajax_load_exp' %}" data-multiplex-url="{% url 'ajax_load_multiplex' %}" data-cities-url="{% url 'ajax_load_cities' %}" novalidate>
                 {% csrf_token %}
                 <div class="container">
                     <div class="form-group">
                     <div class="thumb">
                         <img src="{% static 'images/ticket/city.png' %}" alt="ticket">
                     </div>
-                    <span class="type">state</span>
-                    <select class="form-select" style="color: #090a0a;" id="stateId">
-                        <option value="">---------</option>
+                    <span class="type ">state</span>
+                    <select class="form-group mt-2" style="color: #090a0a;" id="stateId" required>
+                        <option value="">----------</option>
                         {% for i in state %}
                             <option value="{{ i.id }}">{{ i.st_name }}</option>
                         {% endfor %}
@@ -240,8 +240,8 @@
                             <img src="{% static 'images/ticket/city.png' %}" alt="ticket">
                         </div>
                         <span class="type">city</span>
-                        <select class="form-select" style="color: #090a0a;" name="city" id="id_city">
-                            <option value="" selected>---------</option>
+                        <select class="form-group" style="color: #090a0a;" name="city" id="id_city" required>
+                           <option value="">----------</option>
                         </select>
                     </div>
 
@@ -250,9 +250,8 @@
                             <img src="{% static 'images/ticket/cinema.png' %}" alt="ticket">
                         </div>
                         <span class="type">cinema</span>
-                        <select class="form-select" style="color: #090a0a;" name="multiplex" id="id_multiplex">
-                            <option value="" selected>---------</option>
-
+                        <select class="form-group" style="color: #090a0a;" name="multiplex" id="id_multiplex" required>
+                            <option value="">----------</option>
                         </select>
                     </div>
 
@@ -262,8 +261,8 @@
                         <img src="{% static 'images/ticket/exp.png' %}" alt="ticket">
                     </div>
                     <span class="type">Experience</span>
-                    <select class="form-select" style="color: #090a0a;" id="id_experience">
-                        <option value="" selected>---------</option>
+                    <select class="form-control" style="color: #090a0a;" id="id_experience" required>
+                        <option value="">----------</option>
                     </select>
                 </div>
 
@@ -272,8 +271,8 @@
                         <img src="{% static 'images/ticket/exp.png' %}" alt="language">
                     </div>
                     <span class="type">language</span>
-                    <select class="form-select" style="color: #090a0a;" id="id_language">
-                        <option value="" selected>---------</option>
+                    <select class="form-control" style="color: #090a0a;" id="id_language" required>
+                        <option value="">----------</option>
                     </select>
                 </div>
 
@@ -283,8 +282,8 @@
                     </div>
 
                     <span class="type">Time</span>
-                    <select class="form-select" style="color: #090a0a;" id="id_time">
-                        <option value="" selected>---------</option>
+                    <select class="form-control" style="color: #090a0a;" id="id_time" required>
+                        <option value="">----------</option>
                     </select>
                 </div>
 
@@ -293,23 +292,19 @@
                         <img src="{% static 'images/ticket/date.png' %}" alt="ticket">
                     </div>
                     <span class="type">date</span>
-                    <select class="form-select" style="color: #090a0a;">
-                        <option value="" selected>---------</option>
-
+                    <select class="form-control" style="color: #090a0a;" required>
                         <option value="{% current_time '%d-%m-%Y' %}">{% current_time "%d-%m-%Y" %}</option>
                         <option value="{{1|sizify}}">{{1|sizify}}</option>
                         <option value="{{2|three_time}}">{{2|three_time}}</option>
 
                     </select>
                 </div>
-
                 </div>
 
-
-
-
+            <button type="submit" class="btn btn-primary">Submit</button>
 
             </form>
+
         </div>
     </section>
 
@@ -397,7 +392,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<!--    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>-->
     <script src="{% static 'js/modernizr-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/plugins.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -408,9 +403,10 @@
     <script src="{% static 'js/countdown.min.js' %}"></script>
     <script src="{% static 'js/odometer.min.js' %}"></script>
     <script src="{% static 'js/viewport.jquery.js' %}"></script>
-<!--    <script src="{% static 'js/nice-select.js' %}"></script>-->
+    <script src="{% static 'js/nice-select.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
 
+<!--  city  -->
   <script>
    $("#stateId").change(function () {
       var url = $("#personFORM").attr("data-cities-url");
@@ -441,6 +437,7 @@
     });
   </script>
 
+<!--  cinema  -->
   <script>
     $("#id_city").change(function () {
     var url = $("#personFORM").attr("data-multiplex-url");
@@ -471,18 +468,22 @@
 });
   </script>
 
+<!--    Experience-->
     <script>
     $("#id_multiplex").change(function () {
       var url = $("#personFORM").attr("data-exp-url");
+      var city_name = $("#id_city").val();
       var cinema_name = $("#id_multiplex").val();
       console.log(cinema_name)
+      console.log(city_name)
       var cinemaId = $(this).val();
 
       if(cinemaId){
         $.ajax({
         url: url,
         data: {
-          'cinema': cinemaId
+          'cinema': cinemaId,
+          'city_name': city_name
         },
         success: function (data) {
             console.log(data);
@@ -499,6 +500,7 @@
     });
     </script>
 
+<!--  language  -->
     <script>
     $("#id_experience").change(function () {
       var url = $("#personFORM").attr("data-len-url");
@@ -532,6 +534,7 @@
     });
     </script>
 
+<!--  Time  -->
     <script>
     $("#id_language").change(function () {
       var url = $("#personFORM").attr("data-time-url");
